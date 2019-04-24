@@ -11,3 +11,7 @@ EzTwimgDownloader for New Twitter!
 ## If you are using Firefox
 5. Visit about:config
 1. Turn off security.csp.enable
+
+## If you are using Chromium
+5. Install [disable-content-security](https://chrome.google.com/webstore/detail/disable-content-security/ieelmcmcagommplceebfedjlakkhpden/related)
+1. Click the turn off switch.
