@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name        Ez Twimg Downloader Gen2
 // @description ツイッターの画像を簡単に保存するUserScriptです。
-// @author      yanorei32
-// @namespace   http://tyan0.dip.jp/~rei/
+// @author      00A0
+// @namespace   https://zerono.cloud/
 // @include     https://twitter.com/*
 // @include     https://pbs.twimg.com/media/*
-// @version     2.0
+// @version     2.1
 // @grant       none
 // @license     The Unlicense
 // @updateURL   https://github.com/Yanorei32/EzTwimgDownloaderGen2/raw/master/EzTwimgDownloaderGen2.user.js
