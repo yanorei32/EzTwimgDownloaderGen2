@@ -5,7 +5,7 @@
 // @namespace   https://zerono.cloud/
 // @include     https://twitter.com/*
 // @include     https://pbs.twimg.com/media/*
-// @version     2.1
+// @version     2.2
 // @grant       none
 // @license     The Unlicense
 // @updateURL   https://github.com/Yanorei32/EzTwimgDownloaderGen2/raw/master/EzTwimgDownloaderGen2.user.js
@@ -82,7 +82,7 @@
       while (e.tagName != 'A')
         e = e.parentElement;
 
-      return e.parentElement.parentElement;
+      return e.parentElement.parentElement.parentElement.parentElement;
     };
 
     const iframeClear = () => {
