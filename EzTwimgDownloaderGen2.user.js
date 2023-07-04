@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name        Ez Twimg Downloader Gen3
+// @name        Ez Twimg Downloader Gen2
 // @description ツイッターの画像を簡単に保存するUserScriptです。
 // @author      00A0
 // @match       https://twitter.com/*
