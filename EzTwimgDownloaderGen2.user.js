@@ -4,7 +4,7 @@
 // @author      00A0
 // @match       https://twitter.com/*
 // @match       https://pbs.twimg.com/media/*
-// @version     3.0
+// @version     3.1
 // @grant       none
 // @license     The Unlicense
 // @updateURL   https://github.com/Yanorei32/EzTwimgDownloaderGen2/raw/master/EzTwimgDownloaderGen2.user.js
@@ -106,7 +106,7 @@
 
       for (let i = 0; i < imgs.length; i++) {
         const img = imgs[i];
-        if (img.alt != '画像') continue;
+        if (img.parentElement.getAttribute('data-testid') != "tweetPhoto") continue;
 
         const article = getArticleByChildElement(img);
         if (processedLists.has(article)) continue;
