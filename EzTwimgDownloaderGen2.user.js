@@ -3,8 +3,9 @@
 // @description ツイッターの画像を簡単に保存するUserScriptです。
 // @author      00A0
 // @match       https://twitter.com/*
+// @match       https://x.com/*
 // @match       https://pbs.twimg.com/media/*
-// @version     3.2
+// @version     3.3
 // @grant       GM_download
 // @license     The Unlicense
 // @updateURL   https://github.com/Yanorei32/EzTwimgDownloaderGen2/raw/master/EzTwimgDownloaderGen2.user.js
