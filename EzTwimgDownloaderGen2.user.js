@@ -5,7 +5,7 @@
 // @match       https://twitter.com/*
 // @match       https://x.com/*
 // @match       https://pbs.twimg.com/media/*
-// @version     3.3
+// @version     3.4
 // @grant       GM_download
 // @license     The Unlicense
 // @updateURL   https://github.com/Yanorei32/EzTwimgDownloaderGen2/raw/master/EzTwimgDownloaderGen2.user.js
@@ -24,8 +24,9 @@
   const addCSS = () => {
     const btnCSS =
       '<style>' +
-      '.download:hover>div>div>div{color: rgba(29, 161, 242, 1.0);}' +
-      '.download:hover>div>div>div>div>div{background-color: rgba(29, 161, 242, 0.1);}' +
+      '.download:hover>div>button>div>div{color: rgba(29, 161, 242, 1.0);}' +
+      '.download:hover>div>button>div>div>div{background-color: rgba(29, 161, 242, 0.1);}' +
+      '.download{margin-left: 5%;}' +
       '</style>'
       ;
     document.head.insertAdjacentHTML('beforeend', btnCSS);
