@@ -5,7 +5,7 @@
 // @match       https://twitter.com/*
 // @match       https://x.com/*
 // @match       https://pbs.twimg.com/media/*
-// @version     3.4
+// @version     3.5
 // @grant       GM_download
 // @license     The Unlicense
 // @updateURL   https://github.com/Yanorei32/EzTwimgDownloaderGen2/raw/master/EzTwimgDownloaderGen2.user.js
@@ -106,11 +106,7 @@
             .replace(/{randomName}/g, parsedURI.randomName)
             .replace(/{extension}/g, parsedURI.extension);
 
-          if (!(event || window.event).shiftKey) {
-            GM_download(maximumQualityURI, downloadFileName);
-          } else {
-            window.open(maximumQualityURI);
-          };
+          GM_download(maximumQualityURI, downloadFileName);
         }
       });
     }
