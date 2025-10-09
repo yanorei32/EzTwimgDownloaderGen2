@@ -5,7 +5,7 @@
 // @match       https://twitter.com/*
 // @match       https://x.com/*
 // @match       https://pbs.twimg.com/media/*
-// @version     4.0
+// @version     4.1
 // @grant       GM_download
 // @license     The Unlicense
 // @updateURL   https://github.com/Yanorei32/EzTwimgDownloaderGen2/raw/master/EzTwimgDownloaderGen2.user.js
@@ -121,6 +121,7 @@
     } else if (checkProfileMediaNode) {
       for (let k = 0; k < checkProfileMediaNode.length; k++) {
         const profileImgNode = checkProfileMediaNode[k];
+        if (profileImgNode.getAttribute('data-testid') != null) continue;
 
         let button = document.createElement('div');
         button.innerHTML =
