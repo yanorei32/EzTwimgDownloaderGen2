@@ -5,7 +5,7 @@
 // @match       https://twitter.com/*
 // @match       https://x.com/*
 // @match       https://pbs.twimg.com/media/*
-// @version     4.2
+// @version     4.3
 // @grant       GM_download
 // @license     The Unlicense
 // @updateURL   https://github.com/Yanorei32/EzTwimgDownloaderGen2/raw/master/EzTwimgDownloaderGen2.user.js
@@ -73,7 +73,7 @@
 		while (e.tagName != 'A') {
 			e = e.parentElement;
 		};
-		return e.parentElement.parentElement.parentElement.parentElement.parentElement;
+		return e.parentElement.parentElement.parentElement.parentElement;
 	};
 
 	const addButtons = (node) => {
@@ -102,7 +102,7 @@
 				buttonGr.insertBefore(button, buttonPNode.nextSibling);
 
 				button.addEventListener('click', () => {
-					const imgsElements = getImagesContainerByImageElement(img).getElementsByTagName('img');
+					const imgsElements = getImagesContainerByImageElement(img).parentElement.getElementsByTagName('img');
 					const imgsInfo = getTweetInfoByImage(img);
 
 					for (let j = 0; j < imgsElements.length; j++) {
@@ -117,63 +117,63 @@
 						GM_download(maximumQualityURI, downloadFileName);
 					}
 				});
-}
-} else if (checkProfileMediaNode) {
-	for (let k = 0; k < checkProfileMediaNode.length; k++) {
-		const profileImgNode = checkProfileMediaNode[k];
-		if (profileImgNode.getAttribute('data-testid') != null) continue;
-
-		let button = document.createElement('div');
-		button.innerHTML =
-			'<div><div><svg viewBox="0 0 24 24" style="width: 18px; height: 18px;"><g class="svgDownload">' +
-			'<path d="M3,14 v5 q0,2 2,2 h14 q2,0 2,-2 v-5 M7,10 l4,4 q1,1 2,0 l4,-4 M12,3 v11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />' +
-											'</g></svg></div></div>'
-		;
-		button.classList.add('download-profile');
-		profileImgNode.appendChild(button);
-
-		button.addEventListener('click', () => {
-			const img = profileImgNode.getElementsByTagName('img')[0];
-			const imgsElements = getImagesContainerByImageElement(img).getElementsByTagName('img');
-			const imgsInfo = getTweetInfoByImage(img);
-
-			for (let l = 0; l < imgsElements.length; l++) {
-				const parsedURI = parseNewFormatURI(imgsElements[l].src);
-				const maximumQualityURI = `https://pbs.twimg.com/media/${parsedURI.randomName}.${parsedURI.extension}:orig`;
-				const downloadFileName = FILENAME_FORMAT
-					.replace(/{userName}/g, imgsInfo.displayName)
-					.replace(/{tweetId}/g, imgsInfo.tweetId)
-					.replace(/{randomName}/g, parsedURI.randomName)
-					.replace(/{extension}/g, parsedURI.extension);
-
-				GM_download(maximumQualityURI, downloadFileName);
 			}
+		} else if (checkProfileMediaNode) {
+			for (let k = 0; k < checkProfileMediaNode.length; k++) {
+				const profileImgNode = checkProfileMediaNode[k];
+				if (profileImgNode.getAttribute('data-testid') != null) continue;
+		
+				let button = document.createElement('div');
+				button.innerHTML =
+					'<div><div><svg viewBox="0 0 24 24" style="width: 18px; height: 18px;"><g class="svgDownload">' +
+					'<path d="M3,14 v5 q0,2 2,2 h14 q2,0 2,-2 v-5 M7,10 l4,4 q1,1 2,0 l4,-4 M12,3 v11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />' +
+													'</g></svg></div></div>'
+				;
+				button.classList.add('download-profile');
+				profileImgNode.appendChild(button);
+		
+				button.addEventListener('click', () => {
+					const img = profileImgNode.getElementsByTagName('img')[0];
+					const imgsElements = getImagesContainerByImageElement(img).getElementsByTagName('img');
+					const imgsInfo = getTweetInfoByImage(img);
+		
+					for (let l = 0; l < imgsElements.length; l++) {
+						const parsedURI = parseNewFormatURI(imgsElements[l].src);
+						const maximumQualityURI = `https://pbs.twimg.com/media/${parsedURI.randomName}.${parsedURI.extension}:orig`;
+						const downloadFileName = FILENAME_FORMAT
+							.replace(/{userName}/g, imgsInfo.displayName)
+							.replace(/{tweetId}/g, imgsInfo.tweetId)
+							.replace(/{randomName}/g, parsedURI.randomName)
+							.replace(/{extension}/g, parsedURI.extension);
+		
+						GM_download(maximumQualityURI, downloadFileName);
+					}
+				});
+			}
+		}
+	};
+
+	//const destroyPromotion = (e) => {
+	//  const spantags = e.getElementsByTagName('span');
+	//  //getArticleByChildElement(spantags[spantags.length-1]).parentElement.parentElement.parentElement.parentElement.textContent = null;
+	//};
+	
+	new MutationObserver((records) => {
+		records.forEach((record) => {
+			toArray(record.addedNodes).forEach((addedNode) => {
+				if (addedNode.nodeType != Node.ELEMENT_NODE) return;
+	
+				addButtons(addedNode);
+				//destroyPromotion(addedNode);
+			});
 		});
-}
-}
-};
-
-//const destroyPromotion = (e) => {
-//  const spantags = e.getElementsByTagName('span');
-//  //getArticleByChildElement(spantags[spantags.length-1]).parentElement.parentElement.parentElement.parentElement.textContent = null;
-//};
-
-new MutationObserver((records) => {
-	records.forEach((record) => {
-		toArray(record.addedNodes).forEach((addedNode) => {
-			if (addedNode.nodeType != Node.ELEMENT_NODE) return;
-
-			addButtons(addedNode);
-			//destroyPromotion(addedNode);
-		});
-	});
-}).observe(
-	document.body,
-	{
-		childList: true,
-		subtree: true,
-	}
-);
-addCSS();
+	}).observe(
+		document.body,
+		{
+			childList: true,
+			subtree: true,
+		}
+	);
+	addCSS();
 })();
 
